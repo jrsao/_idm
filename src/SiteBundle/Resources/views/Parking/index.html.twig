@@ -1,6 +1,6 @@
-{% extends 'SiteBundle:Unit:Common/layout.html.twig' %}
+{% extends 'SiteBundle:Parking:Common/layout.html.twig' %}
 
-{% block pageTitle %}Liste des locaux{% endblock pageTitle %}
+{% block pageTitle %}Liste des stationnements{% endblock pageTitle %}
 
 {% block leftSide %} {{ block('indexActions') }} {% endblock leftSide %}
 
@@ -8,16 +8,16 @@
     {% embed "CommonBundle:Listing:listing.html.twig" with {'entities': entities} %}
         
         {% block showRoute %}
-            {{ path('unit_show', {'id': entity.id })}}
+{#            {{ path('parking_show', {'id': entity.id })}}#}
         {% endblock showRoute%}    
         
-        {% block caption %}{% endblock caption%}
+        {% block caption %}
+        {% endblock caption%}
         
         {% block tableHeader %}
             {{ listing.header('Id')}}
             {{ listing.header('Numéro')}}
             {{ listing.header('Type')}}
-            {{ listing.header('Bâtiment')}}
             {{ listing.header('Site')}}
             {{ listing.header('Disponible')}}
         {% endblock tableHeader%}
@@ -25,9 +25,8 @@
         {% block tableBody %}
             {{ listing.element( entity.id )}}
             {{ listing.element( entity.no )}}
-            {{ listing.element( entity.unitType )}}
-            {{ listing.element( entity.building )}}
-            {{ listing.element( entity.building.site )}}
+            {{ listing.element( entity.parkingType )}}
+            {{ listing.element( entity.site )}}
             {{ listing.element( '-' )}}
         {% endblock tableBody%}
         

@@ -21,7 +21,6 @@
             {% if entity is defined and entity is not null %}
                 <a href="{{ path('building_edit', {'id': entity.id })}}">Modifier le batiment</a><br />
                 <a href="{{ path('building_delete', {'id': entity.id })}}">Supprimer le batiment</a><br />
-                <a href="{{ path('unit_add_building', {'id': entity.id })}}">Ajouter un local</a><br />
             {% endif %}
         {% endblock actions%}
         
