@@ -16,6 +16,11 @@ use DateTime;
 class Client
 {
     /**
+     * @ORM\OneToMany(targetEntity="ContractBundle\Entity\Contract", mappedBy="client")
+     **/
+    private $contracts;
+    
+    /**
      * @ORM\OneToOne(targetEntity="Person", inversedBy="client", cascade={"persist"})
      * @ORM\JoinColumn(name="person_id", referencedColumnName="id")
      **/
@@ -96,5 +101,55 @@ class Client
     public function getPerson()
     {
         return $this->person;
+    }
+    
+    /**
+     * Add contract
+     *
+     * @param \Adress $contract
+     * @return Person
+     */
+    public function addContract(Contract $contract)
+    {
+        $contract->setClient($this);
+        $this->contracts[] = $contract;
+        
+        return $this;
+    }
+    
+    /**
+     * remove contract
+     *
+     * @param \Adress $contract
+     * @return Person
+     */
+    public function removeContract(Contract $contract)
+    {
+        $this->contracts->removeElement($contract);
+        
+        return $this;
+    }
+    
+    /**
+     * Set contracts
+     *
+     * @param \Adress $contracts
+     * @return Person
+     */
+    public function setContracts($contracts)
+    {
+        $this->contracts = $contracts;
+
+        return $this;
+    }
+
+    /**
+     * Get contracts
+     *
+     * @return \Contract 
+     */
+    public function getContracts()
+    {
+        return $this->contracts ;
     }
 }
