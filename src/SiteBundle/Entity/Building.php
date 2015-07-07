@@ -46,6 +46,11 @@ class Building
      * @ORM\Column(name="description", type="text")
      */
     private $description;
+    
+    public function __toString()
+    {
+        return $this->name;
+    }
 
     public function __construct()
     {
