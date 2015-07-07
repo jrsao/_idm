@@ -1,0 +1,9 @@
+{% extends 'TaxeBundle::layout.html.twig' %}
+
+{% use 'TaxeBundle:Taxe:Partial/blocks.html.twig' %}
+
+{% block title %}Taxes{% endblock title %}
+
+{% block leftSide %}
+    {{ block('actions') }}
+{% endblock leftSide %}

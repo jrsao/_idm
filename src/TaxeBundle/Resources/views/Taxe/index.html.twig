@@ -1,0 +1,35 @@
+{% extends 'TaxeBundle:Taxe:Common/layout.html.twig' %}
+
+{% block pageTitle %}
+    Historique du taux des taxes
+{% endblock %}
+
+{% block leftSide %}
+    {{ block('indexActions') }}
+{% endblock %}
+
+{% block information %}
+    {% embed "CommonBundle:Listing:listing.html.twig" with {'entities': entities} %}
+        
+        {% block showRoute %}
+        {% endblock %}    
+        
+        {% block caption %}
+        {% endblock caption%}
+        
+        {% block tableHeader %}
+            {{ listing.header('Id')}}
+            {{ listing.header('Type')}}
+            {{ listing.header('Taux')}}
+            {{ listing.header('Date en vigueur')}}
+        {% endblock tableHeader%}
+        
+        {% block tableBody %}
+            {{ listing.element( entity.id )}}
+            {{ listing.element( entity.taxeType )}}
+            {{ listing.element( entity.rate ~ ' %')}}
+            {{ listing.element( entity.changingDate.date )}}
+        {% endblock tableBody%}
+        
+    {% endembed %}
+{% endblock information %}

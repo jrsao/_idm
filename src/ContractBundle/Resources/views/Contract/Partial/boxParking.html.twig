@@ -1,0 +1,41 @@
+{% block box %}
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingOne">
+            <h4 class="panel-title">
+                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseParkingContract" aria-expanded="true" aria-controls="collapseParkingContract">
+                    Contrats de Stationnements
+                </a>
+                <a href="{{ route }}"><button class="btn btn-default" ng-click="test()">+</button></a>
+            </h4>
+        </div>
+        <div id="collapseParkingContract" class="panel-collapse collapse {% if display %} in {% endif %}" role="tabpanel" aria-labelledby="headingOne">
+            <div class="panel-body">
+                    {% embed "CommonBundle:Listing:listing.html.twig" with {'entities': parkingContracts} %}
+        
+                        {% block showRoute %}
+                            {{ path('contract_show', {'id': entity.id })}}
+                        {% endblock showRoute%}    
+
+                        {% block caption %}{% endblock caption%}
+
+                        {% block tableHeader %}
+                            {{ listing.header('Id')}}
+                            {{ listing.header('Stationnement')}}
+                            {{ listing.header('Type de Stationnement')}}
+                            {{ listing.header('Prix')}}
+                            {{ listing.header('Actif')}}
+                        {% endblock tableHeader%}
+
+                        {% block tableBody %}
+                            {{ listing.element( entity.id )}}
+                            {{ listing.element( entity.parking.no )}}
+                            {{ listing.element( entity.parking.parkingType )}}
+                            {{ listing.element( entity.price )}}
+                            {{ listing.element( 'oui' )}}
+                        {% endblock tableBody%}
+
+                    {% endembed %}
+            </div>
+        </div>
+    </div>
+{% endblock %} 

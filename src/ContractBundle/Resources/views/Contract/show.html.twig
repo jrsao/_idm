@@ -1,0 +1,22 @@
+{% extends 'ContractBundle:Contract:Common/layout.html.twig' %}
+
+{% block pageTitle %}Contrats {{ entity.id }}{% endblock pageTitle %}
+
+{% block leftSide %} {{ block('showActions') }} {% endblock leftSide %}
+
+{% block informationTitle %}Information{% endblock %}
+
+{% block information %}
+    {{ show.property('Id', entity.Id) }}
+    {{ show.property("Date d'entrée", entity.dateEntry.date) }}
+    {{ show.property('Date de sortie', entity.dateLeaving.date) }}
+    {{ show.property('Local', entity.unit) }}
+    {{ show.property('Stationnement', entity.parking) }}
+    {{ show.property('Prix', entity.price ~ ' $') }}
+{% endblock information %}
+
+{% block relation %}
+{% endblock relation %}
+
+{% block secondRelation %}
+{% endblock %}

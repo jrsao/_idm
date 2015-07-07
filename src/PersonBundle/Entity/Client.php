@@ -4,6 +4,7 @@ namespace PersonBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use PersonBundle\Entity\Person;
+use ContractBundle\Entity\Contract;
 
 use DateTime;
 
@@ -45,6 +46,11 @@ class Client
     public function __construct()
     {
         $this->registerDate = new DateTime;
+    }    
+    
+    public function __toString()
+    {
+        return (string)$this->person;
     }
     
     /**

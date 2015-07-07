@@ -5,6 +5,7 @@ namespace SiteBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use SiteBundle\Entity\Building;
 use SiteBundle\Entity\UnitType;
+use ContractBundle\Entity\Contract;
 
 /**
  * Unit
@@ -14,6 +15,11 @@ use SiteBundle\Entity\UnitType;
  */
 class Unit
 {
+    /**
+     * @ORM\OneToMany(targetEntity="ContractBundle\Entity\Contract", mappedBy="unit")
+     **/
+    private $contracts;
+    
     /**
      * @ORM\ManyToOne(targetEntity="Building", inversedBy="units", cascade={"persist"})
      * @ORM\JoinColumn(name="building_id", referencedColumnName="id")
@@ -41,7 +47,11 @@ class Unit
      * @ORM\Column(name="no", type="string", length=255)
      */
     private $no;
-
+    
+    public function __toString()
+    {
+        return $this->no.' ( '.$this->unitType.' )';
+    }
 
     /**
      * Get id
@@ -120,5 +130,55 @@ class Unit
     public function getUnitType()
     {
         return $this->unitType;
+    }
+    
+    /**
+     * Add contract
+     *
+     * @param \Contract $contract
+     * @return Unit
+     */
+    public function addContract(Contract $contract)
+    {
+        $contract->setUnit($this);
+        $this->contracts[] = $contract;
+        
+        return $this;
+    }
+    
+    /**
+     * remove contract
+     *
+     * @param \Contract $contract
+     * @return Unit
+     */
+    public function removeContract(Contract $contract)
+    {
+        $this->contracts->removeElement($contract);
+        
+        return $this;
+    }
+    
+    /**
+     * Set contracts
+     *
+     * @param \Contract $contracts
+     * @return Unit
+     */
+    public function setContracts($contracts)
+    {
+        $this->contracts = $contracts;
+
+        return $this;
+    }
+
+    /**
+     * Get contracts
+     *
+     * @return \Contract 
+     */
+    public function getContracts()
+    {
+        return $this->contracts ;
     }
 }

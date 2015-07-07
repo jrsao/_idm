@@ -1,0 +1,20 @@
+{% extends 'ContractBundle:Contract:Common/layout.html.twig' %}
+
+{% block pageTitle %}Liste des contrats{% endblock pageTitle %}
+
+{% block leftSide %} {{ block('indexActions') }} {% endblock leftSide %}
+
+{% block information %}
+    {% include 'ContractBundle:Contract:Partial/boxUnit.html.twig' with {
+        'unitContracts' : unitContracts,
+        'route' : path('contract_unit_add'),
+        'display': true
+        } 
+    %}
+    {% include 'ContractBundle:Contract:Partial/boxParking.html.twig' with {
+        'parkingContracts' : parkingContracts,
+        'route' : path('contract_parking_add'),
+        'display': true
+        } 
+    %}
+{% endblock information%}

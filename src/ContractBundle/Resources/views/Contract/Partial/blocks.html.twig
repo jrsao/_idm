@@ -1,0 +1,42 @@
+{% block indexActions %}
+    {% embed "CommonBundle:Partial:blocks.html.twig" %}
+        {% block actions %}
+            
+        {% endblock %}
+    {% endembed %}
+{% endblock  %}
+
+{% block formActions %}
+    {% embed "CommonBundle:Partial:blocks.html.twig" %}
+        {% block actions %}
+            <a href="{{ path('contract_index')}}">Retour à la liste des contrats</a>
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
+
+{% block showActions %}
+    {% embed "CommonBundle:Partial:blocks.html.twig" %}
+        {% block actions %}
+            <a href="{{ path('contract_index')}}">Retour à la liste des contrats</a><br />
+            {% if entity is defined and entity is not null %}
+            
+                {% if entity.unit is defined and entity.unit is not null %}
+                    <a href="{{ path('contract_unit_edit', {'id': entity.id })}}">Modifier le contrat</a><br />
+                {% endif %}
+
+                {% if entity.parking is defined and entity.parking is not null %}
+                     <a href="{{ path('contract_parking_edit', {'id': entity.id })}}">Modifier le contrat</a><br />
+                {% endif %}
+                
+                <a href="{{ path('contract_delete', {'id': entity.id })}}">Supprimer le contrat</a><br />
+
+            {% endif %}
+        {% endblock %}
+        
+        {% block reports %}
+        {% endblock reports%}
+    {% endembed %}
+{% endblock %}
+
+{% block sidebox %}
+{% endblock sidebox %}    

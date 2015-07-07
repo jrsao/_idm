@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use SiteBundle\Entity\Vehicule;
 use SiteBundle\Entity\Site;
 use SiteBundle\Entity\ParkingType;
+use ContractBundle\Entity\Contract;
 
 /**
  * Parking
@@ -15,6 +16,11 @@ use SiteBundle\Entity\ParkingType;
  */
 class Parking
 {    
+    /**
+     * @ORM\OneToMany(targetEntity="ContractBundle\Entity\Contract", mappedBy="parking")
+     **/
+    private $contracts;
+    
     /**
      * @ORM\ManyToOne(targetEntity="Site", inversedBy="parkings", cascade={"persist"})
      * @ORM\JoinColumn(name="site_id", referencedColumnName="id")
@@ -47,7 +53,11 @@ class Parking
      * @ORM\Column(name="no", type="string", length=255)
      */
     private $no;
-
+        
+    public function __toString()
+    {
+        return $this->no.' ( '.$this->parkingType.' )';
+    }
 
     /**
      * Get id
@@ -176,5 +186,55 @@ class Parking
     public function getParkingType()
     {
         return $this->parkingType;
+    }
+    
+    /**
+     * Add contract
+     *
+     * @param \Contract $contract
+     * @return Parking
+     */
+    public function addContract(Contract $contract)
+    {
+        $contract->setParking($this);
+        $this->contracts[] = $contract;
+        
+        return $this;
+    }
+    
+    /**
+     * remove contract
+     *
+     * @param \Contract $contract
+     * @return Parking
+     */
+    public function removeContract(Contract $contract)
+    {
+        $this->contracts->removeElement($contract);
+        
+        return $this;
+    }
+    
+    /**
+     * Set contracts
+     *
+     * @param \Contract $contracts
+     * @return Parking
+     */
+    public function setContracts($contracts)
+    {
+        $this->contracts = $contracts;
+
+        return $this;
+    }
+
+    /**
+     * Get contracts
+     *
+     * @return \Contract 
+     */
+    public function getContracts()
+    {
+        return $this->contracts ;
     }
 }

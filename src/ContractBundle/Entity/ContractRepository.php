@@ -12,4 +12,30 @@ use Doctrine\ORM\EntityRepository;
  */
 class ContractRepository extends EntityRepository
 {
+    public function findAllUnitContract()
+    {
+        return $this->createQueryBuilder('self')
+            ->where('self.unit IS NOT NULL')
+            ->andWhere('self.parking IS NULL')
+            ->getQuery()
+            ->getResult();
+    }
+    
+    public function findAllParkingContract()
+    {
+        return $this->createQueryBuilder('self')
+            ->where('self.parking IS NOT NULL')
+            ->andWhere('self.unit IS NULL')
+            ->getQuery()
+            ->getResult();
+    }
+    
+    public function findSpecialContract()
+    {
+        return $this->createQueryBuilder('self')
+            ->where('self.parking IS NOT NULL')
+            ->andWhere('self.unit IS NOT NULL')
+            ->getQuery()
+            ->getResult();
+    }
 }

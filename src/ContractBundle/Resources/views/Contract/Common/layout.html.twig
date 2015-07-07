@@ -1,0 +1,9 @@
+{% extends 'ContractBundle::layout.html.twig' %}
+
+{% use 'ContractBundle:Contract:Partial/blocks.html.twig' %}
+
+{% block title %}Contrats{% endblock title %}
+
+{% block leftSide %}
+    {{ block('actions') }}
+{% endblock leftSide %}
