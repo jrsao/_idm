@@ -8,7 +8,7 @@ use Doctrine\DBAL\Schema\Schema;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-class Version20150706142537 extends AbstractMigration
+class Version20150707123530 extends AbstractMigration
 {
     /**
      * @param Schema $schema
@@ -34,6 +34,7 @@ class Version20150706142537 extends AbstractMigration
         $this->addSql('CREATE TABLE address (id INT AUTO_INCREMENT NOT NULL, state_id INT DEFAULT NULL, city_id INT DEFAULT NULL, country_id INT DEFAULT NULL, person_id INT DEFAULT NULL, site_id INT DEFAULT NULL, streetNumber INT NOT NULL, street VARCHAR(255) NOT NULL, zipCode VARCHAR(15) DEFAULT NULL, INDEX IDX_D4E6F815D83CC1 (state_id), INDEX IDX_D4E6F818BAC62AF (city_id), INDEX IDX_D4E6F81F92F3E70 (country_id), INDEX IDX_D4E6F81217BBB47 (person_id), INDEX IDX_D4E6F81F6BD1646 (site_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE phone_numbers (id INT AUTO_INCREMENT NOT NULL, person_id INT DEFAULT NULL, site_id INT DEFAULT NULL, contact VARCHAR(255) NOT NULL, type VARCHAR(255) DEFAULT NULL, phone_number VARCHAR(255) NOT NULL, INDEX IDX_E7DC46CB217BBB47 (person_id), INDEX IDX_E7DC46CBF6BD1646 (site_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE states (id INT AUTO_INCREMENT NOT NULL, country_id INT DEFAULT NULL, name VARCHAR(255) NOT NULL, code VARCHAR(15) DEFAULT NULL, INDEX IDX_31C2774DF92F3E70 (country_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE contract (id INT AUTO_INCREMENT NOT NULL, client_id INT NOT NULL, unit_id INT DEFAULT NULL, parking_id INT DEFAULT NULL, dateEntry DATETIME NOT NULL, dateLeaving DATETIME NOT NULL, price NUMERIC(10, 0) NOT NULL, INDEX IDX_E98F285919EB6921 (client_id), INDEX IDX_E98F2859F8BD700D (unit_id), INDEX IDX_E98F2859F17B2DD (parking_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB');
         $this->addSql('ALTER TABLE clients ADD CONSTRAINT FK_C82E74217BBB47 FOREIGN KEY (person_id) REFERENCES persons (id)');
         $this->addSql('ALTER TABLE vehicules ADD CONSTRAINT FK_78218C2DF17B2DD FOREIGN KEY (parking_id) REFERENCES parkings (id)');
         $this->addSql('ALTER TABLE parking_type_sites ADD CONSTRAINT FK_AEA8FD2F4BA67449 FOREIGN KEY (parking_type_id) REFERENCES parking_types (id)');
@@ -53,6 +54,9 @@ class Version20150706142537 extends AbstractMigration
         $this->addSql('ALTER TABLE phone_numbers ADD CONSTRAINT FK_E7DC46CB217BBB47 FOREIGN KEY (person_id) REFERENCES persons (id)');
         $this->addSql('ALTER TABLE phone_numbers ADD CONSTRAINT FK_E7DC46CBF6BD1646 FOREIGN KEY (site_id) REFERENCES sites (id)');
         $this->addSql('ALTER TABLE states ADD CONSTRAINT FK_31C2774DF92F3E70 FOREIGN KEY (country_id) REFERENCES countries (id)');
+        $this->addSql('ALTER TABLE contract ADD CONSTRAINT FK_E98F285919EB6921 FOREIGN KEY (client_id) REFERENCES clients (id)');
+        $this->addSql('ALTER TABLE contract ADD CONSTRAINT FK_E98F2859F8BD700D FOREIGN KEY (unit_id) REFERENCES units (id)');
+        $this->addSql('ALTER TABLE contract ADD CONSTRAINT FK_E98F2859F17B2DD FOREIGN KEY (parking_id) REFERENCES parkings (id)');
     }
 
     /**
@@ -63,6 +67,7 @@ class Version20150706142537 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
+        $this->addSql('ALTER TABLE contract DROP FOREIGN KEY FK_E98F285919EB6921');
         $this->addSql('ALTER TABLE clients DROP FOREIGN KEY FK_C82E74217BBB47');
         $this->addSql('ALTER TABLE address DROP FOREIGN KEY FK_D4E6F81217BBB47');
         $this->addSql('ALTER TABLE phone_numbers DROP FOREIGN KEY FK_E7DC46CB217BBB47');
@@ -77,6 +82,8 @@ class Version20150706142537 extends AbstractMigration
         $this->addSql('ALTER TABLE address DROP FOREIGN KEY FK_D4E6F81F6BD1646');
         $this->addSql('ALTER TABLE phone_numbers DROP FOREIGN KEY FK_E7DC46CBF6BD1646');
         $this->addSql('ALTER TABLE vehicules DROP FOREIGN KEY FK_78218C2DF17B2DD');
+        $this->addSql('ALTER TABLE contract DROP FOREIGN KEY FK_E98F2859F17B2DD');
+        $this->addSql('ALTER TABLE contract DROP FOREIGN KEY FK_E98F2859F8BD700D');
         $this->addSql('ALTER TABLE units DROP FOREIGN KEY FK_E9B074494D2A7E12');
         $this->addSql('ALTER TABLE address DROP FOREIGN KEY FK_D4E6F818BAC62AF');
         $this->addSql('ALTER TABLE address DROP FOREIGN KEY FK_D4E6F81F92F3E70');
@@ -98,5 +105,6 @@ class Version20150706142537 extends AbstractMigration
         $this->addSql('DROP TABLE address');
         $this->addSql('DROP TABLE phone_numbers');
         $this->addSql('DROP TABLE states');
+        $this->addSql('DROP TABLE contract');
     }
 }

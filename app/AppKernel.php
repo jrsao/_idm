@@ -24,6 +24,7 @@ class AppKernel extends Kernel
             new SiteBundle\SiteBundle(),
             new CoordinateBundle\CoordinateBundle(),
             new ContractBundle\ContractBundle(),
+            new TaxeBundle\TaxeBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
