@@ -119,6 +119,6 @@ class UnitController extends CrudBaseController
             return $this->redirect($this->generateUrl('building_show', array('id' => $id), 301));
         }
         
-        return array('form' => $form->createView());
+        return array('form' => $form->createView(), 'buildingId' => $building->getId());
     }
 }

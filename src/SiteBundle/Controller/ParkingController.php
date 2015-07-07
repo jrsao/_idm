@@ -109,6 +109,6 @@ class ParkingController extends CrudBaseController
             return $this->redirect($this->generateUrl('site_show', array('id' => $id), 301));
         }
         
-        return  array('form' => $form->createView());
+        return  array('form' => $form->createView(), 'siteId' => $site->getId());
     }
 }

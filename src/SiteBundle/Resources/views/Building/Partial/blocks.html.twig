@@ -9,7 +9,7 @@
 {% block formActions %}
     {% embed "CommonBundle:Partial:blocks.html.twig" %}
         {% block actions %}
-{#            <a href="{{ path('site_index')}}">Retour a la liste de sites</a>#}
+            <a href="{{ path('site_show', { 'id' : siteId })}}">Retour au site</a>
         {% endblock actions%}
     {% endembed %}
 {% endblock formActions %}
@@ -17,10 +17,10 @@
 {% block showActions %}
     {% embed "CommonBundle:Partial:blocks.html.twig" %}
         {% block actions %}
-            <a href="{{ path('building_index')}}">Retour a la liste</a><br />
+            <a href="{{ path('site_show', { 'id' : entity.site.id })}}">Retour au site {{ entity.site.name }}</a><br />
             {% if entity is defined and entity is not null %}
-                <a href="{{ path('building_edit', {'id': entity.id })}}">Modifier le batiment</a><br />
-                <a href="{{ path('building_delete', {'id': entity.id })}}">Supprimer le batiment</a><br />
+                <a href="{{ path('building_edit', {'id': entity.id })}}">Modifier le bâtiment</a><br />
+                <a href="{{ path('building_delete', {'id': entity.id })}}">Supprimer le bâtiment</a><br />
             {% endif %}
         {% endblock actions%}
         

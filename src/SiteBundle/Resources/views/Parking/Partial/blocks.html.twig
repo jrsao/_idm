@@ -9,7 +9,7 @@
 {% block formActions %}
     {% embed "CommonBundle:Partial:blocks.html.twig" %}
         {% block actions %}
-{#            <a href="{{ path('site_index')}}">Retour a la liste de sites</a>#}
+            <a href="{{ path('site_show', { 'id' : siteId })}}">Retour au site</a>
         {% endblock actions%}
     {% endembed %}
 {% endblock formActions %}

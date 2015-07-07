@@ -1,7 +1,10 @@
-{% extends 'SiteBundle:UnitType:Common/layout.html.twig' %}
+{% extends 'SiteBundle:Building:Common/layout.html.twig' %}
 
-{% block body %}
-    <h3>modification de batiment</h3>
+{% block leftSide %} {{ block('formActions') }} {% endblock leftSide %}
+
+{% block pageTitle %}Modification de bâtiment{% endblock pageTitle%}
+
+{% block information %}
     <div class="well">
         {{ form(form) }}
     </div> 
