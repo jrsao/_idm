@@ -1,0 +1,35 @@
+{% extends 'PersonBundle:Client:Common/layout.html.twig' %}
+
+{% block pageTitle %}
+    Liste des clients
+{% endblock %}
+
+{% block leftSide %} 
+    {{ block('indexActions') }} 
+{% endblock %}
+
+{% block information %}
+    {% embed "CommonBundle:Listing:listing.html.twig" with {'entities': entities} %}
+        
+        {% block showRoute %}
+            {{ path('client_show', {'id': entity.id })}}
+        {% endblock %}    
+        
+        {% block caption %}{% endblock caption%}
+        
+        {% block tableHeader %}
+            {{ listing.header('Id')}}
+            {{ listing.header('Prenom')}}
+            {{ listing.header('Nom')}}
+            {{ listing.header("Date d'enregistrement")}}
+        {% endblock %}
+        
+        {% block tableBody %}
+            {{ listing.element( entity.id )}}
+            {{ listing.element( entity.person.firstName )}}
+            {{ listing.element( entity.person.lastName )}}
+            {{ listing.element( entity.registerDate.date )}}
+        {% endblock %}
+        
+    {% endembed %}
+{% endblock %}

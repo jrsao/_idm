@@ -1,0 +1,10 @@
+{% block form %}
+    <form action="{{ path(route, {'id': entity.id}) }}" method="post">
+        <a href="{{ path('client_show', {'id': entity.id}) }}" class="btn btn-default">
+            <i class="glyphicon glyphicon-chevron-left"></i>
+            Retour à l'annonce
+        </a>
+        <input type="submit" value="Supprimer" class="btn btn-danger" />
+        {{ form_rest(form) }}
+    </form>
+{% endblock form %}

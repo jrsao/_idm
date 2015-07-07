@@ -1,0 +1,31 @@
+{% extends 'SiteBundle:Unit:Common/layout.html.twig' %}
+
+{% block pageTitle %}Liste des locaux{% endblock pageTitle %}
+
+{% block leftSide %} {{ block('indexActions') }} {% endblock leftSide %}
+
+{% block information %}
+    {% embed "CommonBundle:Listing:listing.html.twig" with {'entities': entities} %}
+        
+        {% block showRoute %}
+            {{ path('unit_show', {'id': entity.id })}}
+        {% endblock showRoute%}    
+        
+        {% block caption %}{% endblock caption%}
+        
+        {% block tableHeader %}
+            {{ listing.header('Id')}}
+            {{ listing.header('Nom')}}
+            {{ listing.header('Description')}}
+            {{ listing.header('Site')}}
+        {% endblock tableHeader%}
+        
+        {% block tableBody %}
+            {{ listing.element( entity.id )}}
+            {{ listing.element( entity.name )}}
+            {{ listing.element( entity.description )}}
+            {{ listing.element( entity.site )}}
+        {% endblock tableBody%}
+        
+    {% endembed %}
+{% endblock information%}

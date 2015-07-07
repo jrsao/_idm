@@ -1,0 +1,23 @@
+{% block listing %}
+{#    <div class='col-lg-8 col-xs-12'>#}
+        {% block listingTable %}
+            <table class="table table-hover table-striped ">
+                <h4>{% block listingTitle %}{% endblock listingTitle%}</h4>
+                <caption>{% block caption %}{% endblock caption%}</caption>
+                <thead>
+                    <tr>
+                    {% block tableHeader %}{% endblock tableHeader%}
+                    </tr>
+                </thead>
+
+                 <tbody>
+                {% for entity in entities %}
+                    <tr data-href="{% block showRoute %}{% endblock showRoute%}" class='td-link'>
+                        {% block tableBody %}{% endblock tableBody%}
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% endblock listingTable%}
+{#    </div><!-- class='col-lg-8 col-xs-12 -->#}
+{% endblock listing%}

@@ -1,0 +1,21 @@
+{% block panelActions %}
+        <section class="panel panel-primary ">
+            <header class="panel-heading">
+                <h3 class="panel-title">{% block panelTitle %}Actions{% endblock panelTitle%}</h3>
+            </header>
+            <div class="panel-body">
+                <p>{% block actions %}{% endblock actions%}</p>
+            </div>
+        </section>
+{% endblock panelActions%}
+
+{% block panelReports %}
+        <section class="panel panel-primary ">
+            <header class="panel-heading">
+                <h3 class="panel-title">{% block panelReportTitle %}Rapports{% endblock panelReportTitle%}</h3>
+            </header>
+            <div class="panel-body">
+                <p>{% block reports %}{% endblock reports%}</p>
+            </div>
+        </section>
+{% endblock panelReports%}

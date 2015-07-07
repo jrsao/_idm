@@ -1,0 +1,11 @@
+{% extends 'CoordinateBundle::layout.html.twig' %}
+
+{% block information %}
+<h3>Ajout d'address</h3>
+<div class="well">
+{#    {% form_theme form 'CommonBundle:Form:form_common.html.twig' %}
+    {{  form_row(form.startDate}) }}#}
+  {{ form(form) }}
+
+</div> 
+{% endblock %}

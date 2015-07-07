@@ -1,0 +1,40 @@
+{% extends 'SiteBundle:Building:Common/layout.html.twig' %}
+
+{% block pageTitle %}Batiment {{ entity.name }}{% endblock pageTitle %}
+
+{% block leftSide %} {{ block('showActions') }} {% endblock leftSide %}
+
+{% block informationTitle %}Information{% endblock %}
+
+{% block information %}
+    {{ show.property('Id', entity.Id) }}
+    {{ show.property('Nom', entity.name) }}
+{% endblock information %}
+
+{% block relation %}
+    {% embed "CommonBundle:Listing:listing.html.twig" with {'entities': entity.units} %}
+        {% block showRoute %}
+            {#            {{ path('unit_show', {'id': entity.id })}}#}
+        {% endblock showRoute%}    
+
+        {% block listingTitle %}Locaux{% endblock listingTitle%}
+
+    {% block caption %}{% endblock caption%}
+
+    {% block tableHeader %}
+        {{ listing.header('No')}}
+        {{ listing.header('Type')}}
+        {{ listing.header('Disponible')}}
+    {% endblock tableHeader%}
+
+    {% block tableBody %}
+        {{ listing.element( entity.no)}}
+        {{ listing.element( entity.unitType)}}
+        {{ listing.element( "0ui" )}}
+    {% endblock tableBody%}
+{% endembed %}
+{% endblock relation %}
+
+{% block secondRelation %}
+    {{ block('sidebox') }}
+{% endblock secondRelation%}

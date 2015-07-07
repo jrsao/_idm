@@ -1,0 +1,9 @@
+{% extends 'PersonBundle::layout.html.twig' %}
+
+{% use 'PersonBundle:Client:Partial/blocks.html.twig' %}
+
+{% block title %}Client{% endblock title %}
+
+{% block leftSide %}
+    {{ block('actions') }}
+{% endblock leftSide %}

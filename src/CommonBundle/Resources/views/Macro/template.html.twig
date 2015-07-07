@@ -1,0 +1,17 @@
+{# Template view used by AngularDirective #}
+
+<div>
+    <div class="field-container" ng-hide="isTriggerable()">
+        <span class="field-label">{{ '{{ label }}' }}</span>
+        <span class="field-value" ng-click="enableEditor()" style="cursor:pointer;"  focus-input>{{ '{{ value }}' }}</span>
+    </div>
+
+    <div class="field-container" ng-show="isTriggerable()">
+        <span class="field-label">{{ '{{ label }}' }}</span>
+        <span class="field-value no-line-height">
+            <input ng-model="editableValue" ng-show="isTriggerable()" ng-keyup="keyupListen($event)">
+            <a href="#" ng-click="save()">Save</a> or
+            <a href="#" ng-click="disableEditor()">cancel</a>
+        </span>
+    </div>
+</div>

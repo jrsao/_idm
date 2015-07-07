@@ -1,0 +1,20 @@
+{% extends 'SiteBundle:Unit:Common/layout.html.twig' %}
+
+{% block pageTitle %}Batiment {{ entity.name }}{% endblock pageTitle %}
+
+{% block leftSide %} {{ block('showActions') }} {% endblock leftSide %}
+
+{% block informationTitle %}Information{% endblock %}
+
+{% block information %}
+    {{ show.property('Id', entity.Id) }}
+    {{ show.property('Nom', entity.name) }}
+{% endblock information %}
+
+{% block relation %}
+    
+{% endblock relation %}
+
+{% block secondRelation %}
+
+{% endblock secondRelation%}

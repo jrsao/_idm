@@ -1,0 +1,78 @@
+{% block test %}
+    <script>
+        
+                app.directive("foo", function ($http) {
+                    "use strict";
+                    
+                    return {
+                        scope: {
+                            label: "=",
+                            value: "=",
+                            field: "=",
+                            id: "=",
+                            route: "="
+                        },
+                        restrict: 'E',
+                        transclude: true,
+                        templateUrl: '/directivePropertyTemplate',
+                        replace: true,
+                        link: function (scope, element, attrs) {
+{#                            element.bind('click', function () {
+                                console.log(scope.label);
+                                console.log(scope.value);
+                                console.log(scope.field);
+                                console.log(scope.id);
+                                console.log(scope.route);
+                            });
+                            element.bind('mouseover', function () {
+                                console.log('label: ' + scope.label);
+                                console.log('value: ' + scope.value);
+                                console.log('field: ' + scope.field);
+                                console.log('id: ' + scope.id);
+                                console.log('route: ' + scope.route);;
+                            });#}
+
+                            scope.enableEditor = function () {
+                                scope.triggerableLabel = scope.label;
+{#                                scope.value = value;#}
+                                scope.editorEnabled = true;
+                                scope.editableValue = scope.value;
+                            };
+
+                            scope.disableEditor = function () {
+                                scope.editorEnabled = false;
+                            };
+
+                            scope.keyupListen = function (event) {
+                                if (event.keyCode === 13) {
+                                    scope.save();
+                                }
+                            };
+
+                            scope.save = function () {
+                                scope.value = scope.editableValue;
+                                scope.disableEditor();
+
+                                var url = '{{ path( 'client_edit_name', {'id': 'var_id', 'value':  "var_value", 'field' : 'var_field' }) }}';
+                                url = url.replace("var_value", scope.value);
+                                url = url.replace("var_id", scope.id);
+                                url = url.replace("var_field", scope.field);
+                                url = url.replace("var_route", scope.route);
+
+                                $http({
+                                    method: 'POST',
+                                    url: url
+                                })
+                            };
+
+                            scope.isTriggerable = function () {
+                                return scope.editorEnabled &&
+                                        scope.triggerableLabel === scope.label;
+                            };
+                        }
+                    };
+                });
+
+    </script>
+    {% block view %}
+{% endblock %}{% endblock %}

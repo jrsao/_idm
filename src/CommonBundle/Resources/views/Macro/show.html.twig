@@ -1,0 +1,50 @@
+{% macro property(label, value) %}
+    <div>
+        <div class="field-container">
+            <span class="field-label">{% if label is defined and label is not empty %}{{ label }}{% endif %}</span>
+            <span id="{{label}}" class="field-value" ng-click="test()">{% if value is defined and value is not empty %}{{ value }}{% endif %}</span>
+        </div>
+    </div>
+{% endmacro %}
+
+{% macro propertyInput(label, value, field, id, postRoute) %}
+    <div>
+        <div class="field-container" ng-hide="isTriggerable('{{ label }}')">
+            <span class="field-label">{% if label is defined and label is not empty %}{{ label }}{% endif %}</span>
+            <span class="field-value" ng-click="enableEditor( '{{ value }}' , '{{ label }}' )" style="cursor:pointer;"  focus-input>
+                {% if value is defined and value is not empty %}
+                    {{ '{{value}}' }}
+                {% endif %}
+            </span>
+        </div>
+
+        <div class="field-container" ng-show="isTriggerable('{{ label }}')">
+            <span class="field-label">
+                {% if label is defined and label is not empty %}{{ label }}{% endif %}
+            </span>
+            <span class="field-value no-line-height">
+                <input ng-model="editableValue" ng-show="isTriggerable('{{ label }}')" ng-keyup="keyupListen($event)">
+                <a href="#" ng-click="save({{ id }},'{{ field }}','{{ postRoute }}')">Save</a> or
+                <a href="#" ng-click="disableEditor()">cancel</a>
+            </span>
+        </div>
+    </div>
+{% endmacro %}
+
+{% macro test(label, value, field, id, route)%}
+    {% embed 'CommonBundle:Macro:test.html.twig'%}
+        {% block view %}
+            <div>
+                <div class="field-container">
+                    <foo 
+                        label="'{{ label }}'"
+                        value="'{{ value }}'"
+                        field="'{{ field }}'"
+                        eid="'{{ id }}'"
+                        postRoute="'{{ route }}'"
+                        />
+                </div>
+            </div>
+        {% endblock %}
+    {%endembed%}
+{% endmacro %}

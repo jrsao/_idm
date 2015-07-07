@@ -1,0 +1,9 @@
+{% extends 'SiteBundle::layout.html.twig' %}
+
+{% use 'SiteBundle:Site:Partial/blocks.html.twig' %}
+
+{% block title %}Site{% endblock title %}
+
+{% block leftSide %}
+    {{ block('actions') }}
+{% endblock leftSide %}

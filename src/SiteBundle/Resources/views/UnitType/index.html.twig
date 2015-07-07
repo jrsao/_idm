@@ -1,0 +1,37 @@
+{% extends 'SiteBundle:UnitType:Common/layout.html.twig' %}
+
+{% block pageTitle %}
+    Liste des types de locaux
+{% endblock %}
+
+{% block leftSide %}
+    {{ block('indexActions') }}
+{% endblock %}
+
+{% block information %}
+    {% embed "CommonBundle:Listing:listing.html.twig" with {'entities': entities} %}
+        
+        {% block showRoute %}
+        {% endblock %}    
+        
+        {% block caption %}
+        {% endblock caption%}
+        
+        {% block tableHeader %}
+            {{ listing.header('Id')}}
+            {{ listing.header('Largeur')}}
+            {{ listing.header('Longueur')}}
+            {{ listing.header('Prix suggérer')}}
+            {{ listing.header('description')}}
+        {% endblock tableHeader%}
+        
+        {% block tableBody %}
+            {{ listing.element( entity.id )}}
+            {{ listing.element( entity.width ~ " '")}}
+            {{ listing.element( entity.height ~ " '")}}
+            {{ listing.element( entity.suggestedPrice ~ ' $')}}
+            {{ listing.element( entity.description )}}
+        {% endblock tableBody%}
+        
+    {% endembed %}
+{% endblock information %}

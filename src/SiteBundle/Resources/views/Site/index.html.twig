@@ -1,0 +1,29 @@
+{% extends 'SiteBundle:Site:Common/layout.html.twig' %}
+
+{% block pageTitle %}Liste des sites{% endblock pageTitle %}
+
+{% block leftSide %} {{ block('indexActions') }} {% endblock leftSide %}
+
+{% block information %}
+    {% embed "CommonBundle:Listing:listing.html.twig" with {'entities': entities} %}
+        
+        {% block showRoute %}
+            {{ path('site_show', {'id': entity.id })}}
+        {% endblock showRoute%}    
+        
+        {% block caption %}{% endblock caption%}
+        
+        {% block tableHeader %}
+            {{ listing.header('Id')}}
+            {{ listing.header('Nom')}}
+            {{ listing.header('Adresse')}}
+        {% endblock tableHeader%}
+        
+        {% block tableBody %}
+            {{ listing.element( entity.id )}}
+            {{ listing.element( entity.Name )}}
+            {{ listing.element( entity.defaultAddress )}}
+        {% endblock tableBody%}
+        
+    {% endembed %}
+{% endblock information%}

@@ -1,0 +1,31 @@
+# app/config/routing.yml
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+    
+fos_js_routing:
+     routes_to_expose: [ (.*) ] 
+    
+dashboard:
+    resource: "@DashboardBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+person:
+    resource: "@PersonBundle/Controller/"
+    type:     annotation
+    prefix:   /
+    
+common:
+    resource: "@CommonBundle/Controller/"
+    type:     annotation
+    prefix:   /
+    
+coordinate:
+    resource: "@CoordinateBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+site:
+    resource: "@SiteBundle/Controller/"
+    type:     annotation
+    prefix:   /

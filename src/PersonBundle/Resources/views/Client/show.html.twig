@@ -1,0 +1,42 @@
+{% extends 'PersonBundle:Client:Common/layout.html.twig' %}
+
+{% block pageTitle %}Client {{ entity.person.lastName }}{% endblock pageTitle %}
+
+{% block leftSide %} {{ block('showActions') }} {% endblock leftSide %}
+{#{% import 'CommonBundle:Macro:show.html.twig' as show %}#}
+
+{% block informationTitle %}Information{% endblock %}
+
+{% block information %}
+{#    <script>
+        var app = angular.module("myApp", []);
+    </script>
+    <div  ng-app="myApp" >#}
+
+        {{ show.property('Prenom', entity.person.firstName) }}
+        {{ show.property('Nom', entity.person.lastName) }}
+
+        {#test angular directive#}
+{#        {{ show.test('Prenom', entity.person.firstName, 'FirstName', entity.id, 'client_edit_name') }}#}
+{#        {{ show.test('Nom', entityri.person.lastName, 'LastName', entity.id, 'client_edit_name') }}#}
+
+        {{ show.property('Id', entity.Id) }}
+        {{ show.property("Date d'enregistrement", entity.registerDate.date) }}
+
+{#    </div>#}
+{% endblock information %}
+
+{% block relation %}
+    {% include 'CoordinateBundle:PhoneNumber:Partial/box.html.twig' with {
+        'phoneNumbers' : entity.person.phoneNumbers,
+        'route' : path('phone_number_person_add', { 'id': entity.person.id} ),
+        'display': true
+        } 
+    %}
+    {% include 'CoordinateBundle:Address:Partial/box.html.twig' with {
+        'addresses' : entity.person.addresses,
+        'route' : path('address_person_add', { 'id': entity.person.id} ),
+        'display': true
+        } 
+    %}
+{% endblock relation %}

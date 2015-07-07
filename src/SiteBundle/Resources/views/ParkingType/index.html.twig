@@ -1,0 +1,33 @@
+{% extends 'SiteBundle:ParkingType:Common/layout.html.twig' %}
+
+{% block pageTitle %}
+    Liste des types de stationnements
+{% endblock pageTitle %}
+
+{% block leftSide %}
+    {{ block('indexActions') }}
+{% endblock leftSide %}
+
+{% block information %}
+    {% embed "CommonBundle:Listing:listing.html.twig" with {'entities': entities} %}
+        
+        {% block showRoute %}
+        {% endblock %}    
+        
+        {% block caption %}
+        {% endblock %}
+        
+        {% block tableHeader %}
+            {{ listing.header('Id')}}
+            {{ listing.header('Description')}}
+            {{ listing.header('Prix suggeré')}}
+        {% endblock %}
+        
+        {% block tableBody %}
+            {{ listing.element( entity.id )}}
+            {{ listing.element( entity.description )}}
+            {{ listing.element( entity.suggestedPrice ~ ' $' )}}
+        {% endblock %}
+        
+    {% endembed %}
+{% endblock %}

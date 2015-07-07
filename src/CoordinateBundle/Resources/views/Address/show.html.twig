@@ -1,0 +1,17 @@
+{% extends 'CoordinateBundle::layout.html.twig' %}
+
+{% import 'CommonBundle:Macro:show.html.twig' as show %}
+
+{% block title %}Address{% endblock title %}
+
+{% block pageTitle %}Addresse{% endblock pageTitle%}
+
+
+{% block body %}
+    {{ show.property('No. civique', entity.streetNumber) }}
+    {{ show.property('Rue', entity.street) }}
+    {{ show.property('Ville', entity.city.name) }}
+    {{ show.property('Province', entity.state.name) }}
+    {{ show.property("Pays", entity.country.name) }}
+    {{ show.property("Code postal", entity.zipCode) }}
+{% endblock body%}

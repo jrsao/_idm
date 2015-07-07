@@ -1,0 +1,9 @@
+{% extends 'SiteBundle::layout.html.twig' %}
+
+{% use 'SiteBundle:ParkingType:Partial/blocks.html.twig' %}
+
+{% block title %}Types de stationnement{% endblock title %}
+
+{% block leftSide %}
+    {{ block('actions') }}
+{% endblock %}

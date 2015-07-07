@@ -1,0 +1,6 @@
+#CommonDemoBundle/Resources/config/services.yml
+services:
+  form.type.datePicker:
+    class: \CommonBundle\Form\Type\DatePickerType
+    tags:
+      - { name: form.type, alias: datePicker }

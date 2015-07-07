@@ -1,0 +1,23 @@
+{% block box %}
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingOne">
+            <h4 class="panel-title">
+                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsePhonenumber" aria-expanded="true" aria-controls="collapsePhonenumber">
+                    Telephones
+                </a>
+                <a href="{{ route }}"><button class="btn btn-default" ng-click="test()">+</button></a>
+            </h4>
+        </div>
+        <div id="collapsePhonenumber" class="panel-collapse collapse {% if display %} in {% endif %}" role="tabpanel" aria-labelledby="headingOne">
+            <div class="panel-body">
+                {% for phoneNumber in phoneNumbers %}
+                    <div class="side-box">
+                        {{ show.property('Contact', phoneNumber.contact) }}
+                        {{ show.property('Type', phoneNumber.type) }}
+                        {{ show.property('No.', phoneNumber.phoneNumber) }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %} 

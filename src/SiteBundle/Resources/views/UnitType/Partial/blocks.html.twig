@@ -1,0 +1,15 @@
+{% block indexActions %}
+    {% embed "CommonBundle:Partial:blocks.html.twig" %}
+        {% block actions %}
+            <a href="{{ path('unit_type_add')}}">Ajouter un type de local</a>
+        {% endblock actions%}
+    {% endembed %}
+{% endblock indexActions %}
+
+{% block formActions %}
+    {% embed "CommonBundle:Partial:blocks.html.twig" %}
+        {% block actions %}
+            <a href="{{ path('site_index')}}">Retour a la liste de sites</a>
+        {% endblock actions%}
+    {% endembed %}
+{% endblock formActions %}

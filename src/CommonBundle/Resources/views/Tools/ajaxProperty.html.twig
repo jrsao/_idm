@@ -1,0 +1,114 @@
+{# #############################
+    Variable needed:
+
+    - 
+    - postRoute
+    - label
+    - value
+    - field (from entity)
+    - id
+############################# #}
+
+{#{% block property %}#}
+{% block property %}
+    
+    {#{% block appScript %}#}
+    {% block appScript %}
+        <script>
+            {#{% block appVariable %}#}
+            {% block appVariable %}
+                var app = angular.module("klo", []);
+            {% endblock appVariable %}
+                
+            {#{% block appDirective %}#}
+
+
+            {#{% block appController %}#}
+            {% block appController %}
+                app.controller("ClickToEditCtrl", function ($scope, $http) {
+                
+                {% block appDirective %}
+                    app.directive('focusInput', function ($timeout) {
+                        return {
+                            scope: true,
+                            restrict: 'AE',
+                            replace: true,
+                            template: 'template.html.twig',
+                            link: function (scope, element, attrs) {
+                                element.bind('click', function () {
+                                    $timeout(function () {
+                                        var input = element.parent().parent().find('input')[0];
+                                        input.setSelectionRange(input.value.length, input.value.length);
+                                        input.focus();
+                                    });
+                                });
+                            }
+                        };
+                    });
+                {% endblock appDirective %}
+                    
+                    console.log('{{value}}');
+
+                    $scope.value = '{{value}}';
+                    $scope.editorEnabled = false;
+
+                    $scope.enableEditor = function () {
+                        $scope.editorEnabled = true;
+                        $scope.editableTitle = $scope.value;
+                    };
+
+                    $scope.disableEditor = function () {
+                        $scope.editorEnabled = false;
+                    };
+
+                    $scope.keyupListen = function (event) {
+                        if (event.keyCode === 13) {
+                            $scope.save();
+                        }
+                    }
+
+                    $scope.save = function () {
+                        $scope.value = $scope.editableTitle;
+                        $scope.disableEditor();
+
+                        var url = '{{ path( postRoute, {'id': id, 'value':  "var_value", 'field' : field }) }}';
+                        url = url.replace("var_value", $scope.value);
+
+                        $http({
+                            method: 'POST',
+                            url: url
+
+                        })
+                    };
+                });
+            {% endblock appController %}
+        </script>
+    {% endblock appScript %}
+    
+    {#{% block appView %}#}
+    {% block appView %}
+        <div ng-app="klo">
+            <div ng-controller="ClickToEditCtrl">
+                <div class="field-container" ng-hide="editorEnabled">
+                    <span class="field-label">{% if label is defined and label is not empty %}{{ label }}{% endif %}</span>
+                    <span class="field-value" ng-click="enableEditor()" style="cursor:pointer;" focus-input>
+                        {% if value is defined and value is not empty %}
+                            {{ '{{value}}' }}
+                        {% endif %}
+                    </span>
+                </div>
+                <div class="field-container" ng-show="editorEnabled">
+                    <span class="field-label">
+                        {% if label is defined and label is not empty %}{{ label }}{% endif %}
+                    </span>
+                    <span class="field-value no-line-height">
+                        <input ng-model="editableTitle" ng-show="editorEnabled" ng-keyup="keyupListen($event)">
+                        <a href="#" ng-click="save()">Save</a> or
+                        <a href="#" ng-click="disableEditor()">cancel</a>
+                    </span>
+                </div>
+            </div>
+        </div>
+    {% endblock appView %}
+                    
+{% endblock property %}

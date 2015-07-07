@@ -1,0 +1,19 @@
+{% macro header(value) %}
+    <th>
+        {% if value is defined and value is not empty %}
+            {{ value }}
+        {% else %}
+            -
+        {% endif %}
+    </th>
+{% endmacro %}
+
+{% macro element(value) %}
+    <td>        
+        {% if value is defined and value is not empty %}
+            {{ value }}
+        {% else %}
+            -
+        {% endif %}
+    </td>
+{% endmacro %}

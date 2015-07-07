@@ -1,0 +1,9 @@
+{% extends 'SiteBundle::layout.html.twig' %}
+
+{% use 'SiteBundle:UnitType:Partial/blocks.html.twig' %}
+
+{% block title %}Type de local{% endblock title %}
+
+{% block leftSide %}
+    {{ block('actions') }}
+{% endblock leftSide %}

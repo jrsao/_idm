@@ -1,0 +1,37 @@
+{% block indexActions %}
+    {% embed "CommonBundle:Partial:blocks.html.twig" %}
+        {% block actions %}
+            <a href="{{ path('parking_add')}}">Ajouter un stationnement</a>
+        {% endblock actions%}
+    {% endembed %}
+{% endblock indexActions %}
+
+{% block formActions %}
+    {% embed "CommonBundle:Partial:blocks.html.twig" %}
+        {% block actions %}
+{#            <a href="{{ path('site_index')}}">Retour a la liste de sites</a>#}
+        {% endblock actions%}
+    {% endembed %}
+{% endblock formActions %}
+
+{% block showActions %}
+    {% embed "CommonBundle:Partial:blocks.html.twig" %}
+        
+        {% block actions %}
+            <a href="{{ path('parking_index')}}">Retour a la liste</a><br />
+            {% if entity is defined and entity is not null %}
+                <a href="{{ path('parking_edit', {'id': entity.id })}}">Modifier le stationnement</a><br />
+                <a href="{{ path('parking_delete', {'id': entity.id })}}">Supprimer le stationnement</a><br />
+                <a href="{{ path('unit_add_parking', {'id': entity.id })}}">Ajouter un local</a><br />
+            {% endif %}
+        {% endblock actions%}
+        
+        {% block reports %}
+        {% endblock reports%}
+        
+    {% endembed %}
+{% endblock showActions %}
+
+{% block sidebox %}
+    {% include 'CommonBundle:Partial:sidebox.html.twig' %}
+{% endblock sidebox %}    

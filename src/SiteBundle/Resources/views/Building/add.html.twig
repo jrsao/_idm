@@ -1,0 +1,11 @@
+{% extends 'SiteBundle:UnitType:Common/layout.html.twig' %}
+
+{% block leftSide %} {{ block('formActions') }} {% endblock leftSide %}
+
+{% block pageTitle %}Ajout d'un batiment{% endblock pageTitle%}
+
+{% block body %}
+    <div class="well">
+        {{ form(form) }}
+    </div> 
+{% endblock body %}

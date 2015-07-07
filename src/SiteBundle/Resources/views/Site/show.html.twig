@@ -1,0 +1,48 @@
+{% extends 'SiteBundle:Site:Common/layout.html.twig' %}
+
+{% block pageTitle %}
+    Site {{ entity.name }}
+{% endblock %}
+
+{% block leftSide %}
+    {{ block('showActions') }}
+{% endblock %}
+
+{% block informationTitle %}
+    Information
+{% endblock %}
+
+{% block information %}
+    {{ show.property('Id', entity.Id) }}
+    {{ show.property('Nom', entity.name) }}
+{% endblock %}
+
+{% block relation %}
+    {% include 'CoordinateBundle:PhoneNumber:Partial/box.html.twig' with {
+        'phoneNumbers' : entity.phoneNumbers,
+        'route' : path('phone_number_site_add', { 'id': entity.id} ),
+        'display': false
+        } 
+    %}
+    {% include 'CoordinateBundle:Address:Partial/box.html.twig' with {
+        'addresses' : entity.addresses,
+        'route' : path('address_site_add', { 'id': entity.id} ),
+        'display': false
+        } 
+    %}
+{% endblock %}
+
+{% block secondRelation %}
+    {% include 'SiteBundle:Building:Partial/box.html.twig' with {
+        'buildings' : entity.buildings,
+        'route' : path('building_add_site', { 'id': entity.id} ),
+        'display': true
+        } 
+    %}
+    {% include 'SiteBundle:Parking:Partial/box.html.twig' with {
+        'parkings' : entity.parkings,
+        'route' : path('parking_add_site', { 'id': entity.id} ),
+        'display': false
+        } 
+    %}
+{% endblock %}

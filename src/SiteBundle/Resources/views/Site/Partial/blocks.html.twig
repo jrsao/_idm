@@ -1,0 +1,37 @@
+{% block indexActions %}
+    {% embed "CommonBundle:Partial:blocks.html.twig" %}
+        {% block actions %}
+            <a href="{{ path('site_add')}}">Ajouter un site</a>
+        {% endblock actions%}
+    {% endembed %}
+{% endblock indexActions %}
+
+
+{% block showActions %}
+    {% embed "CommonBundle:Partial:blocks.html.twig" %}
+        {% block actions %}
+            <a href="{{ path('site_index')}}">Retour a la liste</a><br />
+            {% if entity is defined and entity is not null %}
+                <a href="{{ path('site_edit', {'id': entity.id })}}">Modifier le site</a><br />
+                <a href="{{ path('site_delete', {'id': entity.id })}}">Supprimer le site</a><br />
+            {% endif %}
+        {% endblock actions%}
+        
+        {% block reports %}
+            Rapport de locaux louer
+            
+        {% endblock reports%}
+    {% endembed %}
+{% endblock showActions %}
+
+
+{% block formActions %}
+    {% embed "CommonBundle:Partial:blocks.html.twig" %}
+        {% block actions %}
+            <a href="{{ path('site_index')}}">Retour a la liste</a><br />
+            {% if id is defined and id is not null %}
+                <a href="{{ path('site_show', {'id': id })}}">Retour au site</a><br />
+            {% endif %}
+        {% endblock actions%}
+    {% endembed %}
+{% endblock formActions %}

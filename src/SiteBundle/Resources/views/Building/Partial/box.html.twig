@@ -1,0 +1,39 @@
+{% block box %}
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingOne">
+            <h4 class="panel-title">
+                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseBuilding" aria-expanded="true" aria-controls="collapseBuilding">
+                    Batiments
+                </a>
+                <a href="{{ route }}"><button class="btn btn-default" ng-click="test()">+</button></a>
+            </h4>
+        </div>
+        <div id="collapseBuilding" class="panel-collapse collapse {% if display %} in {% endif %}" role="tabpanel" aria-labelledby="headingOne">
+            <div class="panel-body">
+                    {% embed "CommonBundle:Listing:listing.html.twig" with {'entities': buildings} %}
+        
+        {% block showRoute %}
+            {{ path('building_show', {'id': entity.id })}}
+        {% endblock showRoute%}    
+        
+        {% block caption %}{% endblock caption%}
+        
+        {% block tableHeader %}
+            {{ listing.header('Id')}}
+            {{ listing.header('Nom')}}
+            {{ listing.header('Description')}}
+            {{ listing.header('Nombre total de locaux')}}
+        {% endblock tableHeader%}
+        
+        {% block tableBody %}
+            {{ listing.element( entity.id )}}
+            {{ listing.element( entity.name )}}
+            {{ listing.element( entity.description )}}
+            {{ listing.element( entity.units|length )}}
+        {% endblock tableBody%}
+        
+    {% endembed %}
+            </div>
+        </div>
+    </div>
+{% endblock %} 

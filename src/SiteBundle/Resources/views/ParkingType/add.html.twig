@@ -1,0 +1,11 @@
+{% extends 'SiteBundle:ParkingType:Common/layout.html.twig' %}
+
+{% block leftSide %} {{ block('formActions') }} {% endblock leftSide %}
+
+{% block pageTitle %}Ajout de type de stationnement{% endblock pageTitle%}
+
+{% block body %}
+    <div class="well">
+        {{ form(form) }}
+    </div> 
+{% endblock body %}
